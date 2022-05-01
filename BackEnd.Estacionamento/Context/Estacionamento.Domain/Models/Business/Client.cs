@@ -64,7 +64,6 @@ namespace Estacionamento.Domain.Models.Bussiness
             var timeIn = TimeIn;
             var timeOut = TimeOut;
             
-            
             if (DaysFree.Contains(dateTime.DayOfWeek))
             {
                 if (dateTime.TimeOfDay > TimeSpan.FromHours(min) || dateTime.TimeOfDay < TimeSpan.FromHours(max))
@@ -84,8 +83,7 @@ namespace Estacionamento.Domain.Models.Bussiness
                         time += timeToRemove * -1;
                     }
                     else if (timeIn.Value.TimeOfDay > TimeSpan.FromHours(min) || timeOut.Value.TimeOfDay < TimeSpan.FromHours(max))
-                    {
-                        
+                    {                       
                     }
                     else
                     {

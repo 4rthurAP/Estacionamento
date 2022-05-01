@@ -11,10 +11,5 @@ namespace Estacionamento.Domain.Services
         public LogService(INotificator notificator, IRepository<Log> repository) : base(notificator, repository)
         {
         }
-
-        public async override Task<IEnumerable<Log>> Get()
-        {
-            return await base.Get();
-        }
     }
 }
