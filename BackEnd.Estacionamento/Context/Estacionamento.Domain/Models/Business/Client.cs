@@ -5,22 +5,23 @@ namespace Estacionamento.Domain.Models.Bussiness
 {
     public record Client : BaseEntity
     {
-        public Client() {}
+        public Client() { }
 
         public string Name { get; init; }
         public string Car { get; init; }
         public string Plate { get; init; }
         public Status? Status { get; init; }
-        public double? Amount => GetValue();
-        public bool HasDiscount => IsSameDay ? TotalTimeInUse.Value.Hours > 10 : TimeInUseWithOutFee.Value.Hours > 10;
         public DateTime? TimeIn { get; init; }
         public DateTime? TimeOut { get; init; }
-        public TimeSpan? TimeInUseWithOutFee => GetTimeSpan();
-        public bool IsSameDay => TimeInUseWithOutFee < TimeSpan.FromHours(24);
-        public TimeSpan? TotalTimeInUse => TimeOut - TimeIn;
-        public List<DateTime> ListDays => SumDates();
-        public List<DayOfWeek> DaysFree => new List<DayOfWeek>() { DayOfWeek.Sunday, DayOfWeek.Wednesday, DayOfWeek.Thursday };
+        public double? Amount => (double)Decimal.Round((decimal)GetValue(), 2);
+        private double SameDay() => IsSameDay ? TotalTimeInUse.Value.Hours == 0 ? TotalTimeInUse.Value.Minutes * 0.01 : TotalTimeInUse.Value.Hours : TimeInUseWithOutFee.Value.TotalHours;
         public bool IsFree => Amount == 0;
+        public bool IsSameDay => !(TimeOut.Value.Date > TimeIn.Value.Date);
+        public TimeSpan? TotalTimeInUse => TimeOut - TimeIn;
+        public TimeSpan? TimeToSafe => IsSameDay ? TotalTimeInUse.Value : TimeInUseWithOutFee.Value;
+        public TimeSpan? TimeInUseWithOutFee => GetTimeSpan();
+        public List<DateTime> ListDays => SumDates();
+        public List<DayOfWeek> DaysFree => new List<DayOfWeek>() { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Thursday };
 
         private List<DateTime> SumDates()
         {
@@ -40,42 +41,61 @@ namespace Estacionamento.Domain.Models.Bussiness
 
         private double GetValue(double min = 11.30, double max = 13.00)
         {
-            if (ListDays.Count == 1)  
+            if (ListDays.Count == 1)
                 if (DaysFree.Contains(ListDays.FirstOrDefault().DayOfWeek))
                     if (ListDays.FirstOrDefault().TimeOfDay >= TimeSpan.FromHours(min) && ListDays.FirstOrDefault().TimeOfDay <= TimeSpan.FromHours(max))
                         return 0;
-
-            if (HasDiscount)
-                return SameDay();
-
-            return SameDay() * 2;
+            return SameDay() <= 1 ?  1 : SameDay() * 2;
         }
-
-        private double SameDay() => IsSameDay ? TotalTimeInUse.Value.Hours : TimeInUseWithOutFee.Value.Hours;
 
         private TimeSpan? GetTimeSpan()
         {
-            TimeSpan time = new();
+            TimeSpan? time = new();
 
             ListDays.ForEach(e => { time = CalculateTime(e); });
 
             return time;
         }
 
-        private TimeSpan CalculateTime(DateTime dateTime)
+        private TimeSpan? CalculateTime(DateTime dateTime, double min = 11.50, double max = 13.00)
         {
-            TimeSpan time = new();
+            TimeSpan? time = new();
 
+            var timeIn = TimeIn;
+            var timeOut = TimeOut;
+            
+            
             if (DaysFree.Contains(dateTime.DayOfWeek))
             {
-                if (dateTime.TimeOfDay > TimeSpan.FromHours(11.30) && dateTime.TimeOfDay < TimeSpan.FromHours(13.00))
+                if (dateTime.TimeOfDay > TimeSpan.FromHours(min) || dateTime.TimeOfDay < TimeSpan.FromHours(max))
                 {
-                    time += (dateTime.TimeOfDay - TimeSpan.FromHours(1.30));
+                    time = timeOut - timeIn;
+                    if (timeIn.Value.TimeOfDay < TimeSpan.FromHours(min) && timeOut.Value.TimeOfDay < TimeSpan.FromHours(max) && IsSameDay)
+                    {
+                        if (time > TimeSpan.FromHours(1.50))
+                        {
+                            var timeToRemove = timeOut.Value.TimeOfDay - TimeSpan.FromHours(min);
+                            time += timeToRemove * -1;
+                        }
+                    }
+                    else if (timeOut.Value.TimeOfDay <= TimeSpan.FromHours(max))
+                    {
+                        var timeToRemove = timeOut.Value.TimeOfDay - TimeSpan.FromHours(min);
+                        time += timeToRemove * -1;
+                    }
+                    else if (timeIn.Value.TimeOfDay > TimeSpan.FromHours(min) || timeOut.Value.TimeOfDay < TimeSpan.FromHours(max))
+                    {
+                        
+                    }
+                    else
+                    {
+                        time -= TimeSpan.FromHours(1.50);
+                    }
                 }
             }
             else
             {
-                time += dateTime.TimeOfDay;
+                time += timeOut - timeIn;
             }
 
             if (dateTime.TimeOfDay.Minutes > 10)

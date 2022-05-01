@@ -28,14 +28,119 @@ namespace Estacionamento.Test.Build
         {
             return new Client()
             {
-                TimeIn = new(2022, 05, 1, 13, 30, 00),
-                TimeOut = new(2022, 05, 1, 17, 30, 00),
+                TimeIn = new(2022, 05, 2, 13, 30, 00),
+                TimeOut = new(2022, 05, 2, 17, 30, 00),
                 Name = "Arthur",
                 Plate = "Plate",
                 Status = Status.Active,
                 Car = "Voyage",
             };
         }
+
+        public static Client NewClientTime10h30m()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 2, 06, 00, 00),
+                TimeOut = new(2022, 05, 2, 18, 00, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
+        public static Client NewClientTime5h30m()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 2, 06, 00, 00),
+                TimeOut = new(2022, 05, 2, 13, 00, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }        
+        
+        public static Client NewClientLessThan30m()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 1, 06, 00, 00),
+                TimeOut = new(2022, 05, 1, 06, 25, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }        
+        
+        public static Client NewClientLessThan24hIn2days()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 1, 13, 00, 00),
+                TimeOut = new(2022, 05, 2, 12, 00, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
+        public static Client NewClientTime1h30m()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 2, 06, 00, 00),
+                TimeOut = new(2022, 05, 2, 07, 30, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
+        public static Client NewClientTime3h30m()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 2, 13, 00, 00),
+                TimeOut = new(2022, 05, 2, 16, 30, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
+        public static Client NewClientMoreThanOneDay()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 1, 00, 01, 00),
+                TimeOut = new(2022, 05, 5, 23, 59, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
+        public static Client NewClientTime3h30mOutOfFreeDays()
+        {
+            return new Client()
+            {
+                TimeIn = new(2022, 05, 2, 13, 00, 00),
+                TimeOut = new(2022, 05, 2, 16, 30, 00),
+                Name = "Arthur",
+                Plate = "Plate",
+                Status = Status.Active,
+                Car = "Voyage",
+            };
+        }
+
 
         public static Client NewClient() => new();
        

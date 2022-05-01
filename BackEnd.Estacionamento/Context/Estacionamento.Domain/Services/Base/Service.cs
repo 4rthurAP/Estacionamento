@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace Estacionamento.Domain.Services.Base
+namespace Estacionamento.Domain.Service.Base
 {
     public class Service<T> : IService<T> where T : BaseEntity
     {

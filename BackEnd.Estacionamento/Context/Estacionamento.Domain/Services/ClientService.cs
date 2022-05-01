@@ -3,11 +3,11 @@ using Estacionamento.Domain.Contracts.Notificator;
 using Estacionamento.Domain.Contracts.Services;
 using Estacionamento.Domain.Enums;
 using Estacionamento.Domain.Models.Bussiness;
-using Estacionamento.Domain.Services.Base;
+using Estacionamento.Domain.Service.Base;
 using Estacionamento.Domain.Validations;
 using FluentValidation.Results;
 
-namespace Estacionamento.Domain.Services
+namespace Estacionamento.Domain.Service
 {
     public class ClientService : Service<Client>, IClientService
     {
@@ -21,11 +21,10 @@ namespace Estacionamento.Domain.Services
         {
             if (!IsValid(new ClientValidation(), entity))
             {
-                await _logRepository.SaveAsync(entity as Log);
+                await _logRepository.SaveAsync(new Log() {Name = entity.Name, Car = entity.Car, Plate = entity.Plate});
                 return await Task.FromResult<Client>(null);
             }
-
-            await _logRepository.SaveAsync(entity as Log);
+            await _logRepository.SaveAsync(new Log() { Name = entity.Name, Car = entity.Car, Plate = entity.Plate });
 
             return await base.SaveAsync(entity);
         }
@@ -34,11 +33,11 @@ namespace Estacionamento.Domain.Services
         {
             if (!IsValid(new ClientValidation(), entity))
             {
-                await _logRepository.SaveAsync(entity as Log);  
+                await _logRepository.SaveAsync(new Log() { Name = entity.Name, Car = entity.Car, Plate = entity.Plate });
                 return await Task.FromResult<Client>(null);     
             }
+            await _logRepository.SaveAsync(new Log() { Name = entity.Name, Car = entity.Car, Plate = entity.Plate });
 
-            await _logRepository.SaveAsync(entity as Log);
             return await base.UpdateAsync(entity);
         }
 
@@ -54,20 +53,5 @@ namespace Estacionamento.Domain.Services
 
         public async Task<IEnumerable<Client>> GetByStatus(Status status) =>
             await _repository.GetByExpressionAsync(e => e.Status == status);
-
-        private async Task teste(string name)
-        {
-            var client = await _repository.GetByExpressionAsync(e => e.Name == name);
-            var time = 0;
-            var amount = 10;
-
-            client.ToList().ForEach(e =>
-            {
-                time += e.TimeInUseWithOutFee.Value.Hours;
-            });
-
-            if (time > 10)
-                amount /= 2;
-        }
     }
 }
