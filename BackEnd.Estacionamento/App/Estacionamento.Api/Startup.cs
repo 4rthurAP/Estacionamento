@@ -1,14 +1,8 @@
-using Estacionamento.Infra.Data;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 using Estacionamento.CrossCutting.IoC;
-using Estacionamento.Domain.Enums;
+using Estacionamento.Infra.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace Estacionamento.Api
 {
@@ -34,7 +28,7 @@ namespace Estacionamento.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cervejaria.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Estacionamento.Api", Version = "v1" });
             });
 
             services.AddRouting(options =>
@@ -49,7 +43,7 @@ namespace Estacionamento.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cervejaria.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Estacionamento.Api v1"));
             }
 
             app.UseHttpsRedirection();

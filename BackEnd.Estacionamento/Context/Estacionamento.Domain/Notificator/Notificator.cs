@@ -7,10 +7,8 @@ namespace Estacionamento.Domain.Notificator
     {
         private readonly ValidationResult _notifications;
 
-        public Notificator()
-        {
+        public Notificator() => 
             _notifications = new ValidationResult();
-        }
 
         public void Handle(ValidationFailure notification) =>
             _notifications.Errors.Add(notification);
