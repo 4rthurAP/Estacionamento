@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estacionamento.Infra", "Con
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A0B7AB35-1F70-4B38-9321-7F0E05F7A6BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estacionamento.Test", "Estacionamento.Test\Estacionamento.Test.csproj", "{31825A4E-411B-439A-AFFA-E74D47802CE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estacionamento.Test", "Test\Estacionamento.Test.csproj", "{31825A4E-411B-439A-AFFA-E74D47802CE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
