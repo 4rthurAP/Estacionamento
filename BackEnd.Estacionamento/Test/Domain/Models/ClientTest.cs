@@ -76,7 +76,7 @@ namespace Estacionamento.Test.Domain.Models
             var client = Factory.NewClientMoreThanOneDay();
 
             //Arrange & Assert
-            client.Amount.Should().Be(236.93);
+            client.Amount.Should().Be(141);
         }
 
         [Fact]

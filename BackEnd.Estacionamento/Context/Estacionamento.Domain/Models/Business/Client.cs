@@ -52,7 +52,7 @@ namespace Estacionamento.Domain.Models.Bussiness
         {
             TimeSpan? time = new();
 
-            ListDays.ForEach(e => { time = CalculateTime(e); });
+            ListDays.ForEach(e => { time += CalculateTime(e); });
 
             return time;
         }
@@ -80,7 +80,8 @@ namespace Estacionamento.Domain.Models.Bussiness
                     else if (timeOut.Value.TimeOfDay <= TimeSpan.FromHours(max))
                     {
                         var timeToRemove = timeOut.Value.TimeOfDay - TimeSpan.FromHours(min);
-                        time += timeToRemove * -1;
+                        var timeToCalculate  =  IsSameDay ? timeToRemove * -1 : - TimeSpan.FromHours(1.50);
+                        time += timeToCalculate ;
                     }
                     else if (timeIn.Value.TimeOfDay > TimeSpan.FromHours(min) || timeOut.Value.TimeOfDay < TimeSpan.FromHours(max))
                     {                       
@@ -93,12 +94,13 @@ namespace Estacionamento.Domain.Models.Bussiness
             }
             else
             {
-                time += timeOut - timeIn;
+                if (IsSameDay)
+                    time = timeOut - timeIn;
             }
 
             if (dateTime.TimeOfDay.Minutes > 10)
             {
-                time += TimeSpan.FromHours(1);
+                time = TimeSpan.FromHours(1);
             }
 
             return time;

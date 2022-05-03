@@ -81,7 +81,7 @@ namespace Estacionamento.Test.Build
             return new Client()
             {
                 TimeIn = new(2022, 05, 1, 13, 00, 00),
-                TimeOut = new(2022, 05, 2, 12, 00, 00),
+                TimeOut = new(2022, 05, 2, 13, 00, 00),
                 Name = "Arthur",
                 Plate = "Plate",
                 Status = Status.Active,
@@ -119,8 +119,8 @@ namespace Estacionamento.Test.Build
         {
             return new Client()
             {
-                TimeIn = new(2022, 05, 1, 00, 01, 00),
-                TimeOut = new(2022, 05, 5, 23, 59, 00),
+                TimeIn = new(2022, 05, 5, 00, 00, 00),
+                TimeOut = new(2022, 05, 8, 00, 00, 00),
                 Name = "Arthur",
                 Plate = "Plate",
                 Status = Status.Active,
