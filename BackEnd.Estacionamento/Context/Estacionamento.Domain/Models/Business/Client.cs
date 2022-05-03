@@ -80,8 +80,8 @@ namespace Estacionamento.Domain.Models.Bussiness
                     else if (timeOut.Value.TimeOfDay <= TimeSpan.FromHours(max))
                     {
                         var timeToRemove = timeOut.Value.TimeOfDay - TimeSpan.FromHours(min);
-                        var timeToCalculate  =  IsSameDay ? timeToRemove * -1 : - TimeSpan.FromHours(1.50);
-                        time += timeToCalculate ;
+                        var timeToCalculate = IsSameDay ? timeToRemove * -1 : - TimeSpan.FromHours(1.50);
+                        time += timeToCalculate;
                     }
                     else if (timeIn.Value.TimeOfDay > TimeSpan.FromHours(min) || timeOut.Value.TimeOfDay < TimeSpan.FromHours(max))
                     {                       
