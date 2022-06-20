@@ -1,8 +1,10 @@
 using Estacionamento.CrossCutting.IoC;
 using Estacionamento.Infra.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using Estacionamento.Api.Config.MiddleWare;
+using Estacionamento.Api.Config.Extension;
 
 namespace Estacionamento.Api
 {
@@ -19,7 +21,8 @@ namespace Estacionamento.Api
         {
             services.AddDbContext<Context>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseInMemoryDatabase("ESTACIONAMENTO");
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             
             services.AutoMapperModule();
@@ -45,6 +48,10 @@ namespace Estacionamento.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Estacionamento.Api v1"));
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 
@@ -57,9 +64,7 @@ namespace Estacionamento.Api
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
             });
-
-            app.UseAuthorization();
-
+            app.UseMiddlewares();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -7,6 +7,8 @@ using Estacionamento.Domain.Service;
 using Estacionamento.Domain.Service.Base;
 using Estacionamento.Domain.Services;
 using Estacionamento.Infra.Repository.Base;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Estacionamento.CrossCutting.IoC
@@ -23,6 +25,7 @@ namespace Estacionamento.CrossCutting.IoC
             .AddScoped<INotificator, Notificator>()
             .AddScoped(typeof(IRepository<>), typeof(Repository<>))
             .AddScoped(typeof(IService<>), typeof(Service<>))
+
  ;
     }
 }

@@ -75,6 +75,22 @@ namespace Estacionamento.Infra.Data
                     .IsUnicode(false)
                     .HasColumnName("PLATE");
 
+                entity.Property(e => e.Host)
+                    .HasMaxLength(30)
+                    .HasColumnName("Host");
+
+                entity.Property(e => e.Objeto)
+                   .HasMaxLength(2000000)
+                   .HasColumnName("Host");
+
+                entity.Property(e => e.Path)
+                   .HasMaxLength(2000000)
+                   .HasColumnName("Host");
+
+                entity.Property(e => e.Trace)
+                   .HasMaxLength(2000000)
+                   .HasColumnName("Host");
+
                 entity.Property(e => e.TimeIn).HasColumnName("TIMEIN");
 
                 entity.Property(e => e.TimeOut).HasColumnName("TIMEOUT");

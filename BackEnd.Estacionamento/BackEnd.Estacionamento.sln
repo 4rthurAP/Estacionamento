@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estacionamento.Infra", "Con
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A0B7AB35-1F70-4B38-9321-7F0E05F7A6BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estacionamento.Test", "Test\Estacionamento.Test.csproj", "{31825A4E-411B-439A-AFFA-E74D47802CE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estacionamento.Test", "Test\Estacionamento.Test.csproj", "{31825A4E-411B-439A-AFFA-E74D47802CE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estacionamento.Worker", "Estacionamento.Worker\Estacionamento.Worker.csproj", "{D865DB71-9F20-47AF-A644-78DE4354C3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{31825A4E-411B-439A-AFFA-E74D47802CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31825A4E-411B-439A-AFFA-E74D47802CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31825A4E-411B-439A-AFFA-E74D47802CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D865DB71-9F20-47AF-A644-78DE4354C3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D865DB71-9F20-47AF-A644-78DE4354C3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D865DB71-9F20-47AF-A644-78DE4354C3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D865DB71-9F20-47AF-A644-78DE4354C3A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{44CEB934-21AB-4BAA-B2D5-9D1E3362B2A8} = {17002A20-3EF3-4D5E-9C61-15AF0FEF2531}
 		{46B57ED7-E73F-4F45-A697-E72932D96CEC} = {17002A20-3EF3-4D5E-9C61-15AF0FEF2531}
 		{31825A4E-411B-439A-AFFA-E74D47802CE9} = {A0B7AB35-1F70-4B38-9321-7F0E05F7A6BD}
+		{D865DB71-9F20-47AF-A644-78DE4354C3A9} = {17002A20-3EF3-4D5E-9C61-15AF0FEF2531}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12B806C5-D93C-4C7C-A5FB-915250D5C8E2}

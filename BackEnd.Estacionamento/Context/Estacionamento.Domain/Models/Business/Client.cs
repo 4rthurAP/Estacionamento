@@ -21,7 +21,7 @@ namespace Estacionamento.Domain.Models.Bussiness
         public TimeSpan? TimeToSafe => IsSameDay ? TotalTimeInUse.Value : TimeInUseWithOutFee.Value;
         public TimeSpan? TimeInUseWithOutFee => GetTimeSpan();
         public List<DateTime> ListDays => SumDates();
-        public List<DayOfWeek> DaysFree => new List<DayOfWeek>() { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Thursday };
+        public List<DayOfWeek> DaysFree => new() { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Thursday };
 
         private List<DateTime> SumDates()
         {

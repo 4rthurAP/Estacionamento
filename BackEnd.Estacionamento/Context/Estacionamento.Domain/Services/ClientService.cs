@@ -19,6 +19,7 @@ namespace Estacionamento.Domain.Service
 
         public override async Task<Client> SaveAsync(Client entity)
         {
+            throw new Exception("ERRO");
             if (!IsValid(new ClientValidation(), entity))
             {
                 await _logRepository.SaveAsync(new Log() {Name = entity.Name, Car = entity.Car, Plate = entity.Plate});
