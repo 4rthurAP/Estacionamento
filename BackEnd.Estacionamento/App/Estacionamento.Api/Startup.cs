@@ -53,6 +53,25 @@ namespace Estacionamento.Api
                 app.UseHsts();
             }
 
+#if DEBUG
+
+            app.Use(async (_, next) =>
+            {
+                try
+                {
+                    await next();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                    throw;
+                }
+            });
+#else
+            app.UseMiddlewares();
+#endif
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -64,7 +83,7 @@ namespace Estacionamento.Api
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
             });
-            app.UseMiddlewares();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
